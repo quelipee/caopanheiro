@@ -1,5 +1,6 @@
 <?php
 
+use App\User\userType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,7 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('phone_number');
             $table->string('address');
-            $table->string('user_type');
+            $table->string('user_type')->default(userType::user);
             $table->rememberToken();
             $table->timestamps();
         });
