@@ -35,4 +35,20 @@ class UserTest extends TestCase
         //response
         $response->assertStatus(ResponseAlias::HTTP_CREATED);
     }
+
+    public function test_user_can_sign_in()
+    {
+        $user = User::factory()->create([
+            'email' => 'fe@gmail.com',
+            'password' => '123456789',
+            'phone_number' => '15996925812',
+        ])->first();
+
+        $payload = [
+         'email' => $user->email,
+         'password' => '123456789',
+        ];
+        $response = $this->post('/login', $payload);
+        $response->assertStatus(ResponseAlias::HTTP_OK);
+    }
 }

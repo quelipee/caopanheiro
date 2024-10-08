@@ -3,13 +3,15 @@
 namespace App\User\services;
 
 use App\Models\User;
+use App\User\dto\signIn;
 use App\User\dto\signUp;
 use App\User\exception\UserException;
 use App\User\UserServiceContract;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
 class UserService implements UserServiceContract
 {
-
     /**
      * @throws UserException
      */
@@ -28,5 +30,22 @@ class UserService implements UserServiceContract
         $user->save();
 
         return $user;
+    }
+    /**
+     * @throws UserException
+     */
+    public function verifyCredentials(signIn $signIn): array
+    {
+        if (!Auth::attempt(['email' => $signIn->email, 'password' => $signIn->password])) {
+            throw UserException::CredentialsInvalidException();
+        }
+
+        $user = Auth::user();
+        $tokenJWT = $user->createToken('jwt')->plainTextToken;
+        return [
+            "access_token" => $tokenJWT,
+            "token_type" => "bearer",
+            "user" => $user
+        ];
     }
 }
