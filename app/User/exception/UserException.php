@@ -10,4 +10,9 @@ class UserException extends Exception
     {
         return new self('Email already exists');
     }
+
+    public static function CredentialsInvalidException(): UserException
+    {
+        return new self('Invalid credentials');
+    }
 }
