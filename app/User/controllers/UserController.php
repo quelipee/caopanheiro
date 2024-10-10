@@ -35,4 +35,13 @@ class UserController extends Controller
             'user' => $user
         ], ResponseAlias::HTTP_OK);
     }
+
+    public function logout() : JsonResponse
+    {
+        $session = $this->userService->invalidateSession();
+        return response()->json([
+            'message' => 'Logout successful',
+            'logout' => $session,
+        ],ResponseAlias::HTTP_OK);
+    }
 }

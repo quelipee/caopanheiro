@@ -15,4 +15,9 @@ class UserException extends Exception
     {
         return new self('Invalid credentials');
     }
+
+    public static function UserNotFoundException(): UserException
+    {
+        return new self('User not found');
+    }
 }

@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Sanctum\Sanctum;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Tests\TestCase;
 
@@ -49,6 +50,14 @@ class UserTest extends TestCase
          'password' => '123456789',
         ];
         $response = $this->post('/login', $payload);
+        $response->assertStatus(ResponseAlias::HTTP_OK);
+    }
+
+    public function test_user_signOut()
+    {
+        $user = User::factory()->create();
+        Sanctum::actingAs($user);
+        $response = $this->post('/logout');
         $response->assertStatus(ResponseAlias::HTTP_OK);
     }
 }

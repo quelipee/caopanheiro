@@ -16,5 +16,8 @@ class UserRouteServiceProvider extends RouteServiceProvider
             Route::post('/register', [ UserController::class, 'store'])->name('register');
             Route::post('/login', [ UserController::class, 'login'])->name('login');
         });
+        Route::middleware(['web','auth:sanctum'])->group(function () {
+            Route::post('/logout', [ UserController::class, 'logout'])->name('logout');
+        });
     }
 }
