@@ -112,4 +112,23 @@ return [
 
     'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
 
+
+    'user_types' => [
+        0 => 'Admin',
+        1 => 'User',
+        2 => 'Moderator',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | User Types
+    |--------------------------------------------------------------------------
+    |
+    | Here you may define the different types of users that your system
+    | supports. These types can be used to manage permissions,
+    | access specific functionalities, and control the user experience.
+    | By default, you may have types such as 'admin', 'user', and 'moderator'.
+    |
+    */
+
 ];

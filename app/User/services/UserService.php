@@ -6,8 +6,7 @@ use App\Models\User;
 use App\User\dto\signIn;
 use App\User\dto\signUp;
 use App\User\exception\UserException;
-use App\User\UserServiceContract;
-use Illuminate\Contracts\Auth\Authenticatable;
+use App\User\interfaces\UserServiceContract;
 use Illuminate\Support\Facades\Auth;
 
 class UserService implements UserServiceContract
