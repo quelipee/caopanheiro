@@ -1,6 +1,6 @@
 <?php
 
-namespace App\User;
+namespace App\User\interfaces;
 
 use App\Models\User;
 use App\User\dto\signIn;

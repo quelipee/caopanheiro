@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use App\User\enums\userType;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Sanctum\Sanctum;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
@@ -16,20 +17,14 @@ class UserTest extends TestCase
      */
     public function test_user_can_register(): void
     {
-        User::factory()->create([
-            'name' => fake()->name(),
-            'email' => 'fe@gmail.com123',
-            'phone_number' => '0123456789',
-            'password' => fake()->password,
-            'address' => fake()->address,
-        ]);
         //prepare
         $payload = [
             'name' => fake()->name(),
             'email' => 'fe@gmail.com',
-            'password' => fake()->password(),
+            'password' => fake()->password(8),
             'phone_number' => '15996925812',
             'address' => fake()->address(),
+            'user_type' => userType::admin
         ];
         //action
         $response = $this->post('/register', $payload);
@@ -43,6 +38,7 @@ class UserTest extends TestCase
             'email' => 'fe@gmail.com',
             'password' => '123456789',
             'phone_number' => '15996925812',
+            'user_type' => userType::admin
         ])->first();
 
         $payload = [

@@ -5,11 +5,10 @@ namespace App\User\controllers;
 use App\Http\Controllers\Controller;
 use App\User\dto\signIn;
 use App\User\dto\signUp;
+use App\User\interfaces\UserServiceContract;
 use App\User\requests\RegisterUserRequest;
 use App\User\requests\SignInUserRequest;
-use App\User\UserServiceContract;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class UserController extends Controller

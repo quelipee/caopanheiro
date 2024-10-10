@@ -20,4 +20,9 @@ class UserException extends Exception
     {
         return new self('User not found');
     }
+
+    public static function UserPermissionsException(): UserException
+    {
+        return new self('User does not have permissions');
+    }
 }

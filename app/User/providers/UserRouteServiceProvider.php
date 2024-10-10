@@ -1,10 +1,9 @@
 <?php
 
-namespace App\User;
+namespace App\User\providers;
 
 use App\User\controllers\UserController;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\User\enums\userType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -31,7 +32,7 @@ class UserFactory extends Factory
             'phone_number' => fake()->phoneNumber(),
             'remember_token' => Str::random(10),
             'address' => fake()->address(),
-
+            'user_type' => userType::user
         ];
     }
 
