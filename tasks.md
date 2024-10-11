@@ -15,8 +15,8 @@
 
 ## 1.2. Gerenciamento de Animais
 
-- [ ] **Cadastro de Animais (Admin):**
-    - [ ] Criar endpoint para cadastro de novos animais para adoção (`POST /animals`).
+- [x] **Cadastro de Animais (Admin):**
+    - [x] Criar endpoint para cadastro de novos animais para adoção (`POST /animals`).
         - Campos: nome, espécie, raça, idade, porte, gênero, status, foto, descrição.
 
 - [ ] **Listagem de Animais Disponíveis para Adoção:**
@@ -24,11 +24,11 @@
         - Implementar filtros por espécie, idade, porte, etc.
   
     - [ ] **Detalhes de Animais:**
-      - [ ] Criar endpoint para visualizar detalhes de um animal (GET /animals/{id}).
+      - [ ] Criar endpoint para visualizar detalhes de um animal (`GET /animals/{id}`).
       
     - [ ] **Edição e Remoção de Animais (Admin):**
-      - [ ] Criar endpoint para editar informações de um animal (PUT /animals/{id}).
-      - [ ] Criar endpoint para remover um animal do banco de dados (DELETE /animals/{id}).
+      - [ ] Criar endpoint para editar informações de um animal (`PUT /animals/{id}`).
+      - [ ] Criar endpoint para remover um animal do banco de dados (`DELETE /animals/{id}`).
 
 ## 1.3. Sistema de Adoção
 

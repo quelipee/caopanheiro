@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('breed');
             $table->integer('age');
             $table->string('gender');
-            $table->integer('size');
+            $table->string('size');
             $table->string('color');
             $table->text('description')->nullable();
             $table->string('status');

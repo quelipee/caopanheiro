@@ -25,4 +25,9 @@ class UserException extends Exception
     {
         return new self('User does not have permissions');
     }
+
+    public static function userTypeNotAdmin(): UserException
+    {
+        return new self('User type not admin');
+    }
 }
