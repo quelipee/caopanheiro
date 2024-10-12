@@ -15,6 +15,14 @@ class PetManagementController extends Controller
         protected PetServiceContract  $petService
     ){}
 
+    public function index(): JsonResponse
+    {
+        $pets_collection = $this->petService->fetchAllPetsCollection();
+        return response()->json([
+            'message' => 'List of all pets retrieved successfully.',
+            'data' => $pets_collection
+        ],ResponseAlias::HTTP_OK);
+    }
     public function store(StorePetRequest $request) : JsonResponse {
         $pet = $this->petService
         ->PetRegistrationService(PetDTO::ValidatePetAttributes($request));

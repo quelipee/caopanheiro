@@ -19,8 +19,8 @@
     - [x] Criar endpoint para cadastro de novos animais para adoção (`POST /animals`).
         - Campos: nome, espécie, raça, idade, porte, gênero, status, foto, descrição.
 
-- [ ] **Listagem de Animais Disponíveis para Adoção:**
-    - [ ] Criar endpoint para listar todos os animais disponíveis (`GET /animals`).
+- [x] **Listagem de Animais Disponíveis para Adoção:**
+    - [x] Criar endpoint para listar todos os animais disponíveis (`GET /animals`).
         - Implementar filtros por espécie, idade, porte, etc.
   
     - [ ] **Detalhes de Animais:**
