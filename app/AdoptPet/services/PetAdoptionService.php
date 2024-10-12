@@ -12,4 +12,8 @@ class PetAdoptionService implements PetAdoptionServiceContract
     {
         return PetEntry::query()->whereNot('status','adopted')->get();
     }
+    public function fetchAnimalDetails(string $id): PetEntry
+    {
+        return PetEntry::query()->findOrFail($id);
+    }
 }

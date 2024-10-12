@@ -23,21 +23,21 @@
     - [x] Criar endpoint para listar todos os animais disponíveis (`GET /animals`).
         - Implementar filtros por espécie, idade, porte, etc.
   
-    - [ ] **Detalhes de Animais:**
-      - [ ] Criar endpoint para visualizar detalhes de um animal (`GET /animals/{id}`).
+    - [x] **Detalhes de Animais:**
+      - [x] Criar endpoint para visualizar detalhes de um animal (`GET /animals/{id}`).
       
     - [ ] **Edição e Remoção de Animais (Admin):**
-      - [ ] Criar endpoint para editar informações de um animal (`PUT /animals/{id}`).
+      - [x] Criar endpoint para editar informações de um animal (`PUT /animals/{id}`).
       - [ ] Criar endpoint para remover um animal do banco de dados (`DELETE /animals/{id}`).
 
 ## 1.3. Sistema de Adoção
 
 - [ ] **Iniciar Processo de Adoção:**
-  - [ ] Criar endpoint para usuários adotarem um animal (POST /adoption).
+  - [ ] Criar endpoint para usuários adotarem um animal (`POST /adoption`).
   - [ ] Associar o usuário e o animal à adoção com status pendente.
   
 - [ ] **Finalizar Adoção (Admin):**
-  - [ ] Criar endpoint para concluir o processo de adoção (PUT /adoption/{id}/complete).
+  - [ ] Criar endpoint para concluir o processo de adoção (`PUT /adoption/{id}/complete`).
   - [ ] Alterar status do animal para "adotado" e atualizar a relação de adoção.
 
 ## 1.4. Sistema de Favoritos

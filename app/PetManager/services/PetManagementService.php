@@ -4,6 +4,8 @@ namespace App\PetManager\services;
 
 use App\Models\PetEntry;
 use App\PetManager\dto\PetDTO;
+use App\PetManager\dto\PetUpdateDTO;
+use App\PetManager\Exceptions\PetException;
 use App\PetManager\interfaces\PetServiceContract;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -28,5 +30,20 @@ class PetManagementService implements PetServiceContract
     public function fetchAllPetsCollection(): Collection
     {
         return PetEntry::all();
+    }
+
+    /**
+     * @throws PetException
+     */
+    public function editAnimalDetails(PetUpdateDTO $dto, string $id): PetEntry
+    {
+        $pet = PetEntry::find($id);
+        $attributes = array_filter((array) $dto);
+        if (!$pet) {
+            throw PetException::PetNotFoundException();
+        }
+        $pet->fill($attributes);
+        $pet->save();
+        return $pet;
     }
 }
