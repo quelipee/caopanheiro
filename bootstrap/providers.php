@@ -7,4 +7,5 @@ return [
     \App\PetManager\providers\PetManagementServiceProvider::class,
     \App\PetManager\providers\PetManagementServiceRouteProvider::class,
     \App\AdoptPet\providers\PetAdoptionServiceProvider::class,
+    \App\AdoptPet\providers\PetAdoptionRouteProvider::class
 ];

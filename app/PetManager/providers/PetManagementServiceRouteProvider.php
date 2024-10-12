@@ -15,7 +15,7 @@ class PetManagementServiceRouteProvider extends RouteServiceProvider
         Route::prefix('admin')->middleware(['web','auth:sanctum','verified','admin'])->group(function () {
             Route::post('/animals',[PetManagementController::class, 'store'])->name('animals.store');
             Route::get('/animals',[PetManagementController::class, 'index'])->name('animals.index');
+            Route::put('/animals/{id}',[PetManagementController::class, 'update'])->name('animals.update');
         });
-        Route::get('/animals',[PetAdoptionController::class, 'index'])->name('animals.index');
     }
 }

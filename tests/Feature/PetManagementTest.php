@@ -36,23 +36,36 @@ class PetManagementTest extends TestCase
             'user_type' => userType::admin
         ])->first();
         Sanctum::actingAs($user);
-        $response = $this->post('/animals', $payload);
+        $response = $this->post('admin/animals', $payload);
         $response->assertStatus(ResponseAlias::HTTP_CREATED);
         $this->assertDatabaseHas('animal',$payload);
     }
-    public function test_animals_available_for_adoption()
-    {
-        PetEntry::factory(10)->create();
-        Sanctum::actingAs(User::factory()->create());
-        $response = $this->get('/animals');
-        $response->assertStatus(ResponseAlias::HTTP_OK);
-    }
-
     public function test_admin_accesses_all_pets_collection()
     {
         PetEntry::factory(10)->create();
         Sanctum::actingAs(User::factory()->create(['user_type' => userType::admin]));
         $response = $this->get('admin/animals');
         $response->assertStatus(ResponseAlias::HTTP_OK);
+    }
+
+    public function test_update_animal()
+    {
+        $petId = PetEntry::factory()->create([
+            'age' => 3,
+            'gender' => 'female'
+        ])->first()->id;
+        Sanctum::actingAs(User::factory()->create(['user_type' => userType::admin]));
+        $payload = [
+            'name' => 'bidu',
+            'age' => 8,
+            'gender' => 'male',
+        ];
+        $response = $this->put('admin/animals/' . $petId, $payload);
+        $response->assertStatus(ResponseAlias::HTTP_CREATED);
+        $this->assertDatabaseHas('animal',[
+            'name' => $payload['name'],
+            'age' => $payload['age'],
+            'gender' => $payload['gender'],
+        ]);
     }
 }

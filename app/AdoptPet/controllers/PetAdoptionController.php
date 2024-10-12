@@ -22,4 +22,13 @@ class PetAdoptionController extends Controller
             'data' => $pet_available
         ], ResponseAlias::HTTP_OK);
     }
+
+    public function show(string $id): JsonResponse
+    {
+        $pet_details = $this->petAdoptionServiceContract->fetchAnimalDetails($id);
+        return response()->json([
+            'message' => 'Animal details retrieved successfully.',
+            'data' => $pet_details
+        ], ResponseAlias::HTTP_OK);
+    }
 }
