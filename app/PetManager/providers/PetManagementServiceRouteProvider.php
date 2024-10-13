@@ -16,6 +16,7 @@ class PetManagementServiceRouteProvider extends RouteServiceProvider
             Route::post('/animals',[PetManagementController::class, 'store'])->name('animals.store');
             Route::get('/animals',[PetManagementController::class, 'index'])->name('animals.index');
             Route::put('/animals/{id}',[PetManagementController::class, 'update'])->name('animals.update');
+            Route::delete('/animals/{id}',[PetManagementController::class, 'destroy'])->name('animals.destroy');
         });
     }
 }

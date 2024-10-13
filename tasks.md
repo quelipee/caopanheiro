@@ -26,9 +26,9 @@
     - [x] **Detalhes de Animais:**
       - [x] Criar endpoint para visualizar detalhes de um animal (`GET /animals/{id}`).
       
-    - [ ] **Edição e Remoção de Animais (Admin):**
+    - [x] **Edição e Remoção de Animais (Admin):**
       - [x] Criar endpoint para editar informações de um animal (`PUT /animals/{id}`).
-      - [ ] Criar endpoint para remover um animal do banco de dados (`DELETE /animals/{id}`).
+      - [x] Criar endpoint para remover um animal do banco de dados (`DELETE /animals/{id}`).
 
 ## 1.3. Sistema de Adoção
 

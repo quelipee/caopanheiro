@@ -12,4 +12,5 @@ interface PetServiceContract
     public function PetRegistrationService(PetDTO $dto) : PetEntry;
     public function fetchAllPetsCollection() : Collection;
     public function editAnimalDetails(PetUpdateDTO $dto, string $id) : PetEntry;
+    public function removePetById(string $id) : bool;
 }

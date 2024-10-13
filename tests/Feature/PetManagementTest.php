@@ -68,4 +68,13 @@ class PetManagementTest extends TestCase
             'gender' => $payload['gender'],
         ]);
     }
+
+    public function test_delete_pet_successfully()
+    {
+        $petId = PetEntry::factory()->create(['name' => 'bidu'])->id;
+        Sanctum::actingAs(User::factory()->create(['user_type' => userType::admin]));
+        $response = $this->delete('admin/animals/' . $petId);
+        $response->assertStatus(ResponseAlias::HTTP_NO_CONTENT);
+        $this->assertDatabaseMissing('animal',['name' => 'bidu']);
+    }
 }
