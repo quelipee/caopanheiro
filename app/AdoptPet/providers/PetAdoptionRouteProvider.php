@@ -13,6 +13,7 @@ class PetAdoptionRouteProvider extends RouteServiceProvider
         Route::middleware(['api','auth:sanctum','verified'])->group(function (){
             Route::get('/animals',[PetAdoptionController::class, 'index'])->name('animals.index');
             Route::get('/animals/{id}',[PetAdoptionController::class, 'show'])->name('animals.show');
+            Route::post('/adoption/{id}',[PetAdoptionController::class, 'adoptAnimal'])->name('animals.adopt');
         });
     }
 }

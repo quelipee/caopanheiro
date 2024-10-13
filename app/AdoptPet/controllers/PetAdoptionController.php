@@ -5,7 +5,6 @@ namespace App\AdoptPet\controllers;
 use App\AdoptPet\interfaces\PetAdoptionServiceContract;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class PetAdoptionController extends Controller
@@ -30,5 +29,13 @@ class PetAdoptionController extends Controller
             'message' => 'Animal details retrieved successfully.',
             'data' => $pet_details
         ], ResponseAlias::HTTP_OK);
+    }
+    public function adoptAnimal(string $id): JsonResponse
+    {
+        $adoption_pet = $this->petAdoptionServiceContract->handleAdoption($id);
+        return response()->json([
+            'message' => 'Animal adopted successfully.',
+            'data' => $adoption_pet
+        ], ResponseAlias::HTTP_CREATED);
     }
 }

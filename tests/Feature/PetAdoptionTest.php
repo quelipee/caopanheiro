@@ -31,4 +31,12 @@ class PetAdoptionTest extends TestCase
         $response = $this->get('/animals/' . $petId);
         $response->assertStatus(ResponseAlias::HTTP_OK);
     }
+
+    public function test_process_adoption()
+    {
+        $petId = PetEntry::factory()->create(['name' => 'bidu'])->id;
+        Sanctum::actingAs(User::factory()->create());
+        $response = $this->post('adoption/' . $petId);
+        $response->assertStatus(ResponseAlias::HTTP_CREATED);
+    }
 }

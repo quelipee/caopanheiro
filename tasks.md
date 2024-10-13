@@ -32,9 +32,9 @@
 
 ## 1.3. Sistema de Adoção
 
-- [ ] **Iniciar Processo de Adoção:**
-  - [ ] Criar endpoint para usuários adotarem um animal (`POST /adoption`).
-  - [ ] Associar o usuário e o animal à adoção com status pendente.
+- [x] **Iniciar Processo de Adoção:**
+  - [x] Criar endpoint para usuários adotarem um animal (`POST /adoption`).
+  - [x] Associar o usuário e o animal à adoção com status pendente.
   
 - [ ] **Finalizar Adoção (Admin):**
   - [ ] Criar endpoint para concluir o processo de adoção (`PUT /adoption/{id}/complete`).

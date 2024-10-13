@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class PetEntry extends Model
 {
@@ -44,4 +45,10 @@ class PetEntry extends Model
         'age' => 'integer',
         'size' => 'integer',
     ];
+
+    public function petAdoption(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class,'adoption',
+            'animal_id','user_id')->withTimestamps();
+    }
 }

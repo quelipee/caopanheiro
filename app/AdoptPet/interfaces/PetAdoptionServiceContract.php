@@ -9,4 +9,5 @@ interface PetAdoptionServiceContract
 {
     public function listAvailableAnimals() : Collection;
     public function fetchAnimalDetails(string $id) : PetEntry;
+    public function handleAdoption(string $id) : PetEntry;
 }
