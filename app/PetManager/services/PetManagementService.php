@@ -46,4 +46,16 @@ class PetManagementService implements PetServiceContract
         $pet->save();
         return $pet;
     }
+
+    /**
+     * @throws PetException
+     */
+    public function removePetById(string $id): bool
+    {
+        $pet = PetEntry::find($id);
+        if (!$pet) {
+            throw PetException::PetNotFoundException();
+        }
+        return $pet->delete();
+    }
 }

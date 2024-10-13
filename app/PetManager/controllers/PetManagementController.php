@@ -43,4 +43,13 @@ class PetManagementController extends Controller
             'data' => $pet_updated
         ], ResponseAlias::HTTP_CREATED);
     }
+
+    public function destroy(string $id): JsonResponse
+    {
+        $pet = $this->petService->removePetById($id);
+        return response()->json([
+            'message' => 'Pet deleted successfully',
+            'data' => $pet
+        ], ResponseAlias::HTTP_NO_CONTENT);
+    }
 }
