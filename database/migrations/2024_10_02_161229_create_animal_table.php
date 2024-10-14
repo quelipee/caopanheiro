@@ -23,6 +23,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('status');
             $table->string('photo');
+            $table->foreignUuid('shelter_id')->constrained('shelter')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

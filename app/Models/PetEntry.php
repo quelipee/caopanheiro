@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class PetEntry extends Model
@@ -28,7 +29,8 @@ class PetEntry extends Model
       'color',
       'description',
       'status',
-      'photo'
+      'photo',
+      'shelter_id'
     ];
 
     /**
@@ -50,5 +52,10 @@ class PetEntry extends Model
     {
         return $this->belongsToMany(User::class,'adoption',
             'animal_id','user_id')->withPivot('status', 'adoption_date')->withTimestamps();
+    }
+
+    public function shelter(): BelongsTo
+    {
+        return $this->belongsTo(Shelter::class);
     }
 }
