@@ -30,4 +30,9 @@ class UserException extends Exception
     {
         return new self('User type not admin');
     }
+
+    public static function petDoesNotAdoption(): UserException
+    {
+        return new self('Pet does not adoption');
+    }
 }

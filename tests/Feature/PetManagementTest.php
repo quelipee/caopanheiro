@@ -2,11 +2,14 @@
 
 namespace Tests\Feature;
 
+use App\AdoptPet\enums\AdoptionStatus;
 use App\Models\PetEntry;
 use App\Models\User;
 use App\User\enums\userType;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\Sanctum;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Tests\TestCase;
@@ -76,5 +79,40 @@ class PetManagementTest extends TestCase
         $response = $this->delete('admin/animals/' . $petId);
         $response->assertStatus(ResponseAlias::HTTP_NO_CONTENT);
         $this->assertDatabaseMissing('animal',['name' => 'bidu']);
+    }
+
+    public function test_admin_finalization_adoption()
+    {
+        Sanctum::actingAs(User::factory()->create(['user_type' => userType::admin]));
+        $pet = PetEntry::factory()->create([
+            'name' => 'bidu',
+            'status' => AdoptionStatus::PENDING->value
+        ]);
+        $user = User::factory()->create([
+            'name' => 'felipe'
+        ]);
+        $user2 = User::factory()->create([
+            'name' => 'joao'
+        ]);
+        $user->userAdoption()->attach($pet->id,[
+            'id' => (string) Str::uuid(),
+            'adoption_date' => Carbon::now(),
+            'status' => AdoptionStatus::PENDING->value,
+        ]);
+        $user2->userAdoption()->attach($pet->id,[
+            'id' => (string) Str::uuid(),
+            'adoption_date' => Carbon::now(),
+            'status' => AdoptionStatus::PENDING->value,
+        ]);
+        $response = $this->put('admin/adoption/' . $pet->id . '/' . $user->id .'/complete');
+        $response->assertStatus(ResponseAlias::HTTP_CREATED);
+        $this->assertDatabaseHas('adoption',[
+            'user_id' => $user->id,
+            'status' => AdoptionStatus::ADOPTED
+        ]);
+        $this->assertDatabaseHas('animal',[
+            'name' => 'bidu',
+            'status' => AdoptionStatus::ADOPTED->value
+        ]);
     }
 }
