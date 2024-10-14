@@ -17,6 +17,7 @@ readonly class PetDTO
         public string $description,
         public string $status,
         public string $photo,
+        public string $shelter_id
     ){}
 
     /**
@@ -42,6 +43,7 @@ readonly class PetDTO
             description: $request->validated('description'),
             status: $request->validated('status'),
             photo: $request->validated('photo'),
+            shelter_id: $request->validated('shelter_id')
         );
     }
 }

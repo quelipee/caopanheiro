@@ -33,6 +33,7 @@ class StorePetRequest extends FormRequest
             'description' => 'nullable|string|max:500',
             'status' => 'required|string|in:available,adopted',
             'photo' => 'required|url',
+            'shelter_id' => 'required|string|max:100','exists:App\Models\PetEntry,id',
         ];
     }
 

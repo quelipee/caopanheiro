@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\AdoptPet\enums\AdoptionStatus;
 use App\Models\PetEntry;
+use App\Models\Shelter;
 use App\Models\User;
 use App\User\enums\userType;
 use Carbon\Carbon;
@@ -33,6 +34,7 @@ class PetManagementTest extends TestCase
             'description' => fake()->text(),
             'status' => fake()->randomElement(['available', 'adopted']),
             'photo' => fake()->imageUrl(640, 480, 'animals', true),
+            'shelter_id' => Shelter::factory()->create()->id,
         ];
 
         $user = User::factory()->create([

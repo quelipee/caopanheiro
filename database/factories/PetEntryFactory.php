@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\PetEntry;
+use App\Models\Shelter;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -28,6 +29,7 @@ class PetEntryFactory extends Factory
             'description' => fake()->text(),
             'status' => fake()->randomElement(['available', 'adopted']),
             'photo' => fake()->imageUrl(640, 480, 'animals', true),
+            'shelter_id' => Shelter::factory()->create()->id,
         ];
     }
 }

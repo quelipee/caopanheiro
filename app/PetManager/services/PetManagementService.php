@@ -4,6 +4,7 @@ namespace App\PetManager\services;
 
 use App\AdoptPet\enums\AdoptionStatus;
 use App\Models\PetEntry;
+use App\Models\Shelter;
 use App\Models\User;
 use App\PetManager\dto\PetDTO;
 use App\PetManager\dto\PetUpdateDTO;
@@ -16,7 +17,8 @@ class PetManagementService implements PetServiceContract
 {
     public function PetRegistrationService(PetDTO $dto) : PetEntry
     {
-        return PetEntry::create([
+        $shelter = Shelter::find($dto->shelter_id);
+        $pet_entry =  new PetEntry([
             'name' => $dto->name,
             'species' => $dto->species,
             'breed' => $dto->breed,
@@ -26,8 +28,11 @@ class PetManagementService implements PetServiceContract
             'color' => $dto->color,
             'description' => $dto->description,
             'status' => $dto->status,
-            'photo' => $dto->photo
+            'photo' => $dto->photo,
         ]);
+        $pet_entry->shelter()->associate($shelter);
+        $pet_entry->save();
+        return $pet_entry;
     }
 
     public function fetchAllPetsCollection(): Collection
