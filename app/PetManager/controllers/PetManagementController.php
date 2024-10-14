@@ -5,6 +5,8 @@ namespace App\PetManager\controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePetRequest;
 use App\Http\Requests\UpdatePetRequest;
+use App\Models\PetEntry;
+use App\Models\User;
 use App\PetManager\dto\PetDTO;
 use App\PetManager\dto\PetUpdateDTO;
 use App\PetManager\interfaces\PetServiceContract;
@@ -51,5 +53,13 @@ class PetManagementController extends Controller
             'message' => 'Pet deleted successfully',
             'data' => $pet
         ], ResponseAlias::HTTP_NO_CONTENT);
+    }
+    public function completeAdoption(PetEntry $pet, User $user): JsonResponse
+    {
+        $adopted = $this->petService->finalizeAdoption($pet, $user);
+        return response()->json([
+            'message' => 'Adoption completed successfully',
+            'data' => $adopted
+        ], ResponseAlias::HTTP_CREATED);
     }
 }

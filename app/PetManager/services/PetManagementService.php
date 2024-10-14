@@ -2,11 +2,14 @@
 
 namespace App\PetManager\services;
 
+use App\AdoptPet\enums\AdoptionStatus;
 use App\Models\PetEntry;
+use App\Models\User;
 use App\PetManager\dto\PetDTO;
 use App\PetManager\dto\PetUpdateDTO;
 use App\PetManager\Exceptions\PetException;
 use App\PetManager\interfaces\PetServiceContract;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
 class PetManagementService implements PetServiceContract
@@ -57,5 +60,18 @@ class PetManagementService implements PetServiceContract
             throw PetException::PetNotFoundException();
         }
         return $pet->delete();
+    }
+    public function finalizeAdoption(PetEntry $pet, User $user): PetEntry
+    {
+        $pet->petAdoption()->updateExistingPivot($user,[
+            'status' => AdoptionStatus::ADOPTED->value,
+            'adoption_date' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+        $pet->update([
+            'status' => AdoptionStatus::ADOPTED->value
+        ]);
+        $pet->save();
+        return $pet;
     }
 }

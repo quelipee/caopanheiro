@@ -49,6 +49,6 @@ class PetEntry extends Model
     public function petAdoption(): BelongsToMany
     {
         return $this->belongsToMany(User::class,'adoption',
-            'animal_id','user_id')->withTimestamps();
+            'animal_id','user_id')->withPivot('status', 'adoption_date')->withTimestamps();
     }
 }

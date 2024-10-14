@@ -4,6 +4,7 @@ namespace App\AdoptPet\controllers;
 
 use App\AdoptPet\interfaces\PetAdoptionServiceContract;
 use App\Http\Controllers\Controller;
+use App\Models\PetEntry;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 

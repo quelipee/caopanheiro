@@ -36,9 +36,9 @@
   - [x] Criar endpoint para usuários adotarem um animal (`POST /adoption`).
   - [x] Associar o usuário e o animal à adoção com status pendente.
   
-- [ ] **Finalizar Adoção (Admin):**
-  - [ ] Criar endpoint para concluir o processo de adoção (`PUT /adoption/{id}/complete`).
-  - [ ] Alterar status do animal para "adotado" e atualizar a relação de adoção.
+- [x] **Finalizar Adoção (Admin):**
+  - [x] Criar endpoint para concluir o processo de adoção (`PUT /adoption/{pet_id}/{user_id}/complete`).
+  - [x] Alterar status do animal para "adotado" e atualizar a relação de adoção.
 
 ## 1.4. Sistema de Favoritos
 

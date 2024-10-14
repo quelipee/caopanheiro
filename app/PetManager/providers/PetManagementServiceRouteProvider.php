@@ -2,7 +2,6 @@
 
 namespace App\PetManager\providers;
 
-use App\AdoptPet\controllers\PetAdoptionController;
 use App\PetManager\controllers\PetManagementController;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +16,9 @@ class PetManagementServiceRouteProvider extends RouteServiceProvider
             Route::get('/animals',[PetManagementController::class, 'index'])->name('animals.index');
             Route::put('/animals/{id}',[PetManagementController::class, 'update'])->name('animals.update');
             Route::delete('/animals/{id}',[PetManagementController::class, 'destroy'])->name('animals.destroy');
+            Route::put('/adoption/{pet}/{user}/complete',[PetManagementController::class, 'completeAdoption'])
+                ->middleware('CheckPetAdoptionStatus')
+                ->name('animals.completeAdoption');
         });
     }
 }
