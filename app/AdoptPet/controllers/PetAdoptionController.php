@@ -39,4 +39,22 @@ class PetAdoptionController extends Controller
             'data' => $adoption_pet
         ], ResponseAlias::HTTP_CREATED);
     }
+
+    public function favorite(PetEntry $id): JsonResponse
+    {
+        $favorite = $this->petAdoptionServiceContract->markAnimalAsFavorite($id);
+        return response()->json([
+            'message' => 'Animal favorite successfully.',
+            'data' => $favorite
+        ], ResponseAlias::HTTP_CREATED);
+    }
+
+    public function showFavoriteAnimals(): JsonResponse
+    {
+        $collection = $this->petAdoptionServiceContract->displayFavoriteAnimals();
+        return response()->json([
+            'message' => 'List of favorite animals for adoption retrieved successfully.',
+            'data' => $collection
+        ]);
+    }
 }

@@ -58,4 +58,9 @@ class PetEntry extends Model
     {
         return $this->belongsTo(Shelter::class);
     }
+
+    public function favorite()
+    {
+        return $this->belongsToMany(User::class,'favorites','animal_id','user_id')->withTimestamps();
+    }
 }
