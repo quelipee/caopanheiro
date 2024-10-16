@@ -35,4 +35,9 @@ class UserException extends Exception
     {
         return new self('Pet does not adoption');
     }
+
+    public static function notLoggedIn(): UserException
+    {
+        return new self('Not logged in');
+    }
 }

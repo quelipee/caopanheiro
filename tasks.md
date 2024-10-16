@@ -42,11 +42,11 @@
 
 ## 1.4. Sistema de Favoritos
 
-- [ ] **Adicionar Animais aos Favoritos:**
-    - [ ] Criar endpoint para que usuários possam adicionar animais aos favoritos (`POST /favorites`).
+- [x] **Adicionar Animais aos Favoritos:**
+    - [x] Criar endpoint para que usuários possam adicionar animais aos favoritos (`POST /favorites`).
 
-- [ ] **Visualizar Animais Favoritos:**
-    - [ ] Criar endpoint para visualizar animais favoritos de um usuário (`GET /favorites`).
+- [x] **Visualizar Animais Favoritos:**
+    - [x] Criar endpoint para visualizar animais favoritos de um usuário (`GET /favorites`).
 
 # 2. Funcionalidades do Frontend (Vue.js)
 

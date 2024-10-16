@@ -58,4 +58,9 @@ class User extends Authenticatable
         return $this->belongsToMany(PetEntry::class, 'adoption',
             'user_id','animal_id')->withPivot('status', 'adoption_date')->withTimestamps();
     }
+
+    public function favorite()
+    {
+        return $this->belongsToMany(PetEntry::class, 'favorites','user_id','animal_id')->withTimestamps();
+    }
 }

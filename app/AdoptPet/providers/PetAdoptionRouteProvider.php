@@ -14,6 +14,8 @@ class PetAdoptionRouteProvider extends RouteServiceProvider
             Route::get('/animals',[PetAdoptionController::class, 'index'])->name('animals.index');
             Route::get('/animals/{id}',[PetAdoptionController::class, 'show'])->name('animals.show');
             Route::post('/adoption/{id}',[PetAdoptionController::class, 'adoptAnimal'])->name('animals.adopt');
+            Route::post('/favorite/{id}',[PetAdoptionController::class, 'favorite'])->name('animals.favorite');
+            Route::get('/favorites',[PetAdoptionController::class,'showFavoriteAnimals'])->name('animals.favorites');
         });
     }
 }
