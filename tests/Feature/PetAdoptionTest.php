@@ -21,7 +21,7 @@ class PetAdoptionTest extends TestCase
     {
         PetEntry::factory(10)->create();
         Sanctum::actingAs(User::factory()->create());
-        $response = $this->get('/animals');
+        $response = $this->get('api/animals');
         $response->assertStatus(ResponseAlias::HTTP_OK);
     }
 
@@ -30,7 +30,7 @@ class PetAdoptionTest extends TestCase
         $petId = PetEntry::factory(10)->create()->first()->id;
         Sanctum::actingAs(User::factory()->create());
 
-        $response = $this->get('/animals/' . $petId);
+        $response = $this->get('api/animals/' . $petId);
         $response->assertStatus(ResponseAlias::HTTP_OK);
     }
 
@@ -38,7 +38,7 @@ class PetAdoptionTest extends TestCase
     {
         $petId = PetEntry::factory()->create(['name' => 'bidu'])->id;
         Sanctum::actingAs(User::factory()->create());
-        $response = $this->post('adoption/' . $petId);
+        $response = $this->post('api/adoption/' . $petId);
         $response->assertStatus(ResponseAlias::HTTP_CREATED);
     }
 
@@ -48,7 +48,16 @@ class PetAdoptionTest extends TestCase
         $user = User::factory()->create();
 
         Sanctum::actingAs($user);
-        $response = $this->post('favorite/' . $petId);
+        $response = $this->post('api/favorite/' . $petId);
+        $response->assertStatus(ResponseAlias::HTTP_CREATED);
+    }
+    public function test_user_can_remove_animal_from_favorites()
+    {
+        $petId = PetEntry::factory()->create()->first()->id;
+        $user = User::factory()->create();
+
+        Sanctum::actingAs($user);
+        $response = $this->delete('api/favorite/'. $petId);
         $response->assertStatus(ResponseAlias::HTTP_CREATED);
     }
 
@@ -63,7 +72,7 @@ class PetAdoptionTest extends TestCase
             ]);
         }
         Sanctum::actingAs($user);
-        $response = $this->get('favorites');
+        $response = $this->get('api/favorites');
         $response->assertStatus(ResponseAlias::HTTP_OK);
     }
 }

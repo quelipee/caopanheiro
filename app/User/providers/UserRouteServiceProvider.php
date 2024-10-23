@@ -11,7 +11,7 @@ class UserRouteServiceProvider extends RouteServiceProvider
 {
     public function map() : void
     {
-        Route::middleware(['web','guest:sanctum'])->group(function () {
+        Route::prefix('api')->middleware(['guest:sanctum'])->group(function () {
             Route::post('/register', [ UserController::class, 'store'])->name('register');
             Route::post('/login', [ UserController::class, 'login'])->name('login');
         });

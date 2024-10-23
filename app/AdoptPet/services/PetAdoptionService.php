@@ -56,6 +56,15 @@ class PetAdoptionService implements PetAdoptionServiceContract
         ]);
         return $id;
     }
+    public function removeFavoriteAnimal(PetEntry $id): PetEntry
+    {
+        $user = User::find(Auth::id());
+        if (!$user){
+            throw UserException::notLoggedIn();
+        }
+        $user->favorite()->detach($id);
+        return $id;
+    }
 
     /**
      * @param $user
