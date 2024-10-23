@@ -48,6 +48,14 @@ class PetAdoptionController extends Controller
             'data' => $favorite
         ], ResponseAlias::HTTP_CREATED);
     }
+    public function unfavorite(PetEntry $id): JsonResponse
+    {
+        $unfavorite = $this->petAdoptionServiceContract->removeFavoriteAnimal($id);
+        return response()->json([
+            'message' => 'Animal unfavorite successfully.',
+            'data' => $unfavorite
+        ], ResponseAlias::HTTP_CREATED);
+    }
 
     public function showFavoriteAnimals(): JsonResponse
     {

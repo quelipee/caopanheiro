@@ -27,7 +27,7 @@ class UserTest extends TestCase
             'user_type' => userType::admin
         ];
         //action
-        $response = $this->post('/register', $payload);
+        $response = $this->post('api/register', $payload);
         //response
         $response->assertStatus(ResponseAlias::HTTP_CREATED);
     }
@@ -45,7 +45,7 @@ class UserTest extends TestCase
          'email' => $user->email,
          'password' => '123456789',
         ];
-        $response = $this->post('/login', $payload);
+        $response = $this->post('api/login', $payload);
         $response->assertStatus(ResponseAlias::HTTP_OK);
     }
 
