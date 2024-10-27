@@ -37,9 +37,24 @@ class PetAdoptionTest extends TestCase
     public function test_process_adoption()
     {
         $petId = PetEntry::factory()->create(['name' => 'bidu'])->id;
+        $payload = [
+            'housing_type' => 'Casa',
+            'availability' => '5',
+            'experience' => 'tenho animais em casa a muito tempo',
+            'other_animals' => 'possuo outro animal de estimação',
+            'reason' => 'gosto muito de cachorros',
+            'animal_id' => $petId,
+        ];
         Sanctum::actingAs(User::factory()->create());
-        $response = $this->post('api/adoption/' . $petId);
+        $response = $this->post('api/adoption/' . $petId, $payload);
         $response->assertStatus(ResponseAlias::HTTP_CREATED);
+        $this->assertDatabaseHas('adoption_interests', [
+            'housing_type' => $payload['housing_type'],
+            'availability' => $payload['availability'],
+            'experience' => $payload['experience'],
+            'other_animals' => $payload['other_animals'],
+            'reason' => $payload['reason'],
+        ]);
     }
 
     public function test_user_can_add_animal_to_favorites()

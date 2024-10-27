@@ -40,4 +40,9 @@ class UserException extends Exception
     {
         return new self('Not logged in');
     }
+
+    public static function adoptionDuplicate(): UserException
+    {
+        return new self('Adoption already exists');
+    }
 }

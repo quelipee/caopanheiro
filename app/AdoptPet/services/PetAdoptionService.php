@@ -2,8 +2,10 @@
 
 namespace App\AdoptPet\services;
 
+use App\AdoptPet\dto\adoptFormDTO;
 use App\AdoptPet\enums\AdoptionStatus;
 use App\AdoptPet\interfaces\PetAdoptionServiceContract;
+use App\Models\AdoptionInterest;
 use App\Models\PetEntry;
 use App\Models\User;
 use App\PetManager\Exceptions\PetException;
@@ -19,21 +21,34 @@ class PetAdoptionService implements PetAdoptionServiceContract
     public function __construct(protected User $user) {}
     public function listAvailableAnimals(): Collection
     {
-        return PetEntry::query()->whereNot('status','adopted')->get();
+        $user = Auth::user();
+        return PetEntry::query()->whereNot('status','adopted')->whereDoesntHave('petAdoption', function ($query) use ($user) {
+            $query->where('user_id',$user->id);
+        })->get();
     }
     public function fetchAnimalDetails(string $id): PetEntry
     {
         return PetEntry::query()->findOrFail($id);
     }
-    public function handleAdoption(string $id): PetEntry
+    public function handleAdoption(adoptFormDTO $adoptFormDTO, string $id): PetEntry
     {
         $pet = PetEntry::query()->findOrFail($id);
+        $adoption_id = (string) Str::uuid();
         $this->user->userAdoption()->attach($pet->id,[
-            'id' => (string) Str::uuid(),
+            'id' => $adoption_id,
             'adoption_date' => Carbon::now(),
             'status' => AdoptionStatus::PENDING->value,
         ]);
-        $this->user->save();
+
+        AdoptionInterest::create([
+            'adoption_id' => $adoption_id,
+            'housing_type' => $adoptFormDTO->housing_type,
+            'availability' => $adoptFormDTO->availability,
+            'experience' => $adoptFormDTO->experience,
+            'other_animals' => $adoptFormDTO->other_animals,
+            'reason' => $adoptFormDTO->reason,
+        ]);
+
         return $pet;
     }
 

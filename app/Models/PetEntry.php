@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class PetEntry extends Model
 {
@@ -51,7 +52,7 @@ class PetEntry extends Model
     public function petAdoption(): BelongsToMany
     {
         return $this->belongsToMany(User::class,'adoption',
-            'animal_id','user_id')->withPivot('status', 'adoption_date')->withTimestamps();
+            'animal_id','user_id')->withPivot('status', 'adoption_date', 'id')->withTimestamps();
     }
 
     public function shelter(): BelongsTo
@@ -62,5 +63,10 @@ class PetEntry extends Model
     public function favorite()
     {
         return $this->belongsToMany(User::class,'favorites','animal_id','user_id')->withTimestamps();
+    }
+
+    public function adoptionInterests(): HasManyThrough
+    {
+        return $this->hasManyThrough(AdoptionInterest::class, Adoption::class,'animal_id','adoption_id');
     }
 }
