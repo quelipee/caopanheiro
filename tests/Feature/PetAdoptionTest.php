@@ -90,4 +90,12 @@ class PetAdoptionTest extends TestCase
         $response = $this->get('api/favorites');
         $response->assertStatus(ResponseAlias::HTTP_OK);
     }
+    public function test_user_can_view_adoption_interests()
+    {
+        $petId = PetEntry::factory()->create()->first()->id;
+        $user = User::factory()->create();
+        Sanctum::actingAs($user);
+        $response = $this->get('api/adoptions/pending');
+        $response->assertStatus(ResponseAlias::HTTP_OK);
+    }
 }

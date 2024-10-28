@@ -95,4 +95,8 @@ class PetAdoptionService implements PetAdoptionServiceContract
     {
         return Auth::user()->favorite()->whereNotIn('status',['adopted'])->get();
     }
+    public function displayPendingAdoptions()
+    {
+        return Auth::user()->userAdoption()->get();
+    }
 }
