@@ -17,6 +17,7 @@ class PetAdoptionRouteProvider extends RouteServiceProvider
             Route::post('/adoption/{id}',[PetAdoptionController::class, 'adoptAnimal'])
                 ->middleware(PreventDuplicateAdoption::class)
                 ->name('animals.adopt');
+            Route::get('/adoptions/pending',[PetAdoptionController::class, 'pendingAdoptions'])->name('adoptions.pending');;
             Route::post('/favorite/{id}',[PetAdoptionController::class, 'favorite'])->name('animals.favorite');
             Route::delete('/favorite/{id}',[PetAdoptionController::class, 'unfavorite'])->name('animals.unfavorite');
             Route::get('/favorites',[PetAdoptionController::class,'showFavoriteAnimals'])->name('animals.favorites');

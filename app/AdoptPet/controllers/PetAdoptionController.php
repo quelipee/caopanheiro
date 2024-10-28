@@ -67,4 +67,12 @@ class PetAdoptionController extends Controller
             'data' => $collection
         ]);
     }
+    public function pendingAdoptions(): JsonResponse
+    {
+        $collection = $this->petAdoptionServiceContract->displayPendingAdoptions();
+        return response()->json([
+            'message' => 'List of pending adoptions retrieved successfully.',
+            'data' => $collection
+        ]);
+    }
 }

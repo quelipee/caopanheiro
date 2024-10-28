@@ -14,4 +14,5 @@ interface PetAdoptionServiceContract
     public function markAnimalAsFavorite(PetEntry $id) : PetEntry;
     public function removeFavoriteAnimal(PetEntry $id) : PetEntry;
     public function displayFavoriteAnimals() : Collection;
+    public function displayPendingAdoptions();
 }
