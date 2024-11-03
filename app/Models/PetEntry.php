@@ -49,6 +49,10 @@ class PetEntry extends Model
         'size' => 'integer',
     ];
 
+    protected $hidden = [
+        'shelter_id',
+    ];
+
     public function petAdoption(): BelongsToMany
     {
         return $this->belongsToMany(User::class,'adoption',

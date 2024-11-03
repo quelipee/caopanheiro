@@ -24,11 +24,11 @@ class PetAdoptionService implements PetAdoptionServiceContract
         $user = Auth::user();
         return PetEntry::query()->whereNot('status','adopted')->whereDoesntHave('petAdoption', function ($query) use ($user) {
             $query->where('user_id',$user->id);
-        })->get();
+        })->with('shelter')->get();
     }
     public function fetchAnimalDetails(string $id): PetEntry
     {
-        return PetEntry::query()->findOrFail($id);
+        return PetEntry::query()->findOrFail($id)->with('shelter')->first();
     }
     public function handleAdoption(adoptFormDTO $adoptFormDTO, string $id): PetEntry
     {
