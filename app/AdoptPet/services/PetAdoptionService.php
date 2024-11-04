@@ -28,7 +28,7 @@ class PetAdoptionService implements PetAdoptionServiceContract
     }
     public function fetchAnimalDetails(string $id): PetEntry
     {
-        return PetEntry::query()->findOrFail($id)->with('shelter')->first();
+        return PetEntry::query()->where('id',$id)->with('shelter')->first();
     }
     public function handleAdoption(adoptFormDTO $adoptFormDTO, string $id): PetEntry
     {
@@ -95,7 +95,7 @@ class PetAdoptionService implements PetAdoptionServiceContract
     {
         return Auth::user()->favorite()->whereNotIn('status',['adopted'])->get();
     }
-    public function displayPendingAdoptions()
+    public function displayPendingAdoptions() : Collection
     {
         return Auth::user()->userAdoption()->get();
     }
