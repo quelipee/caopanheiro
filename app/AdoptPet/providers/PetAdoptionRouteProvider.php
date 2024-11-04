@@ -13,7 +13,9 @@ class PetAdoptionRouteProvider extends RouteServiceProvider
     {
         Route::prefix('api')->middleware(['api','auth:sanctum','verified'])->group(function (){
             Route::get('/animals',[PetAdoptionController::class, 'index'])->name('animals.index');
-            Route::get('/animals/{id}',[PetAdoptionController::class, 'show'])->name('animals.show');
+            Route::get('/animals/{id}',[PetAdoptionController::class, 'show'])
+                ->middleware(PreventDuplicateAdoption::class)
+                ->name('animals.show');
             Route::post('/adoption/{id}',[PetAdoptionController::class, 'adoptAnimal'])
                 ->middleware(PreventDuplicateAdoption::class)
                 ->name('animals.adopt');
